@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from app.models import File
+
+def index(request):
+    file_list = File.objects.all()
+    return render(request, "index.html", {"file_list": file_list})

@@ -1,0 +1,43 @@
+{% load mptt_tags %}
+<style>
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        list-style-image: none;
+    }
+    li::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -1px;
+        width: 11px;
+        height: 11px;
+        border-bottom: 1px solid #636363;
+    }
+    li:last-child::before {
+        border-left: 1px solid #636363;
+        width: 10px;
+    }
+    li:last-child {
+        border-color: transparent;
+    }
+    li {
+        border-left: 1px solid #636363;
+        position: relative;
+        padding-left: 13px;
+        margin-left: 7px;
+    }
+</style>
+<ul class="root">
+    {% recursetree file_list %}
+        <li>
+            {{ node.name }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
